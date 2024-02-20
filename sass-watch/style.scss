@@ -1,0 +1,115 @@
+@import "variables";
+@import "common";
+@mixin center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+@mixin round {
+  border-radius: 100%;
+}
+@mixin box($w, $h, $bgc) {
+  width: $w;
+  height: $h;
+  background-color: $bgc;
+}
+
+.watch {
+  @include box($mainsize, $mainsize, $mainmaterialcolor);
+  @include center;
+  @include round;
+
+  .screen {
+    @include box($innerSize, $innerSize, darken($mainmaterialcolor, 12%));
+    @include center;
+    @include round;
+
+    .dash {
+      @include box($dashW, $dashH, lighten($mainmaterialcolor, 22%));
+      @include center;
+      margin-right: $dashW;
+      transform-origin: -$innerRadius + 2 * $dashW 0;
+
+      @for $n from 1 through 60 {
+        &:nth-child(#{$n}) {
+          transform: rotate(($n - 1) * 6deg);
+
+          @if ($n - 1) % 5 == 0 {
+            background-color: darken($mainmaterialcolor, 25%);
+            transform-origin: -$innerRadius + 3 * $dashW 0;
+            width: $dashW * 2;
+            &::after {
+              content: "";
+              display: block;
+              transform: translateX(-30px) rotate(90deg);
+            }
+
+            @if $n == 1 {
+              &::after {
+                content: "3";
+              }
+            }
+            @if $n == 6 {
+              &::after {
+                content: "4";
+              }
+            }
+            @if $n == 11 {
+              &::after {
+                content: "5";
+              }
+            }
+            @if $n == 16 {
+              &::after {
+                content: "6";
+              }
+            }
+            @if $n == 21 {
+              &::after {
+                content: "7";
+              }
+            }
+            @if $n == 26 {
+              &::after {
+                content: "8";
+              }
+            }
+            @if $n == 31 {
+              &::after {
+                content: "9";
+              }
+            }
+            @if $n == 36 {
+              &::after {
+                content: "10";
+              }
+            }
+            @if $n == 41 {
+              &::after {
+                content: "11";
+              }
+            }
+            @if $n == 46 {
+              &::after {
+                content: "12";
+              }
+            }
+            @if $n == 51 {
+              &::after {
+                content: "1";
+              }
+            }
+            @if $n == 56 {
+              &::after {
+                content: "2";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
