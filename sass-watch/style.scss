@@ -26,6 +26,19 @@
     @include box($innerSize, $innerSize, darken($mainmaterialcolor, 12%));
     @include center;
     @include round;
+    &::before {
+      display: block;
+      content: "";
+      width: 12px;
+      height: 12px;
+      background-color: #fff;
+      border-radius: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+    }
 
     .dash {
       @include box($dashW, $dashH, lighten($mainmaterialcolor, 22%));
@@ -111,5 +124,59 @@
         }
       }
     }
+  }
+}
+.arrow {
+  background-color: aqua;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  z-index: 1;
+  transform-origin: bottom;
+}
+.arrow:first-of-type {
+  width: $arrowW * 0.5;
+  height: $arrowH * 0.9;
+  background-color: red;
+
+  top: $arrowH - ($arrowH * 0.9);
+  z-index: 3;
+  animation: watch 60s steps(60) infinite;
+}
+
+.arrow:nth-of-type(2) {
+  width: $arrowW * 1.1;
+  height: $arrowH * 0.7;
+  background-color: lighten($mainmaterialcolor, 10%);
+
+  top: $arrowH - ($arrowH * 0.7);
+  z-index: 2;
+  animation: watch 3600s steps(60) infinite;
+}
+.arrow:nth-of-type(3) {
+  width: $arrowW * 1.2;
+  height: $arrowH * 0.5;
+  background-color: lighten($mainmaterialcolor, 50%);
+  top: $arrowH - ($arrowH * 0.5);
+  z-index: 1;
+  animation: watchhour 43200s linear infinite;
+}
+@keyframes watch {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes watchhour {
+  from {
+    transform: rotate(20deg);
+  }
+  to {
+    transform: rotate(340deg);
   }
 }
